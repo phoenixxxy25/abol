@@ -61,8 +61,7 @@
     </div>
 </div>
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/jquery-1.10.2.min.js" ></script>
 <script type="text/javascript">
 function cbtodel(id)
 {

@@ -42,6 +42,9 @@
 						    </ul>
 						  </div>
 						@endif
+	                	@if(Request::session()->get('create_post_error'))
+		                	<h1 class="h1Err">{{Session::pull('create_post_error')}}</h1>
+		                @endif
 						{!! Form::open(['route' => 'post.store', 'files' => true]) !!}
 						    <div class="form-group">
 						        {!! Form::label('Заголовок') !!}

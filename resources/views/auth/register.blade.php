@@ -7,6 +7,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
+                    @if(Request::session()->get('regist_error'))
+                        <h1 class="h1Err">{{Session::pull('regist_error')}}</h1>
+                    @endif
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
 
                         <div class="form-group">
@@ -101,7 +104,7 @@
                         <div class="form-group">
                            <label class="col-md-4 control-label"></label>
 
-                            <div id="upmapmesspool" class="col-md-6" style="color: red; font-weight: bold;"></div>
+                        <div id="upmapmesspool" class="col-md-6" style="color: red; font-weight: bold;"></div>
                         </div>
                         <div class="form-group" id="mapdiv" style="display: none;">
                            <label class="col-md-4 control-label">Карта</label>
@@ -124,6 +127,7 @@
 </div>
 
 
+<script src="/js/jquery-1.10.2.min.js" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD0ffMzdlaD3w-h4I8ge3Kn6PYO4RF83ro&sensor=false"></script>
     <script type="text/javascript">

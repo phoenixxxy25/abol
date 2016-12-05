@@ -64,11 +64,16 @@ class AuthController extends Controller
 
     public function register(User $userModel, Request $request)
     {
-
+        if($request->input('password') != $request->input('password_confirmation')){
+            $request->session()->set('regist_error', 'ОШИБКА! Пароли не совпадают!');
+            $request->session()->save();
+            return Redirect::back();
+        }
+         
         $user = new User();
         $user->email = $request->input('email');
         $user->full_name = $request->input('full_name');
-        $user->birthday = $request->input('birthday');
+        $user->birthday = $request->get('birthday');
         $user->address = $request->input('address');
         $user->city = $request->input('city');
         $user->state = $request->input('state');

@@ -8,7 +8,7 @@
                 <div class="panel-body">
 
 					@if (!Auth::guest())
-					<br>{!! link_to_route('post.create', 'create new') !!}
+					<br>{!! link_to_route('post.create', 'Добавить новое объявление') !!}
 					@endif
 						@foreach($posts as $post)
 							<article>

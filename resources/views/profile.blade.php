@@ -29,7 +29,7 @@
               </tr>
               <tr>
                 <td>BirthDay:</td>
-                <td>{{$user[0]->birthday}}</td>
+                <td>{{substr($user[0]->birthday,  0, -9)}}</td>
               </tr>
             </table>
           <table>
@@ -57,8 +57,8 @@
 
 
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD0ffMzdlaD3w-h4I8ge3Kn6PYO4RF83ro&sensor=false"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD0ffMzdlaD3w-h4I8ge3Kn6PYO4RF83ro&sensor=false"></script>
     <script type="text/javascript">
         function ShowPositon(city="", address="", country="", state="", zip=""){
 

@@ -20,13 +20,13 @@
 
 
 <h2>{{$post->title}}</h2>
-<small>Дата статьи: {{$post->updated_at}}</small>
+<small>Дата: {{$post->updated_at}} | Автор: <a href="{{action('HomeController@user',['user'=>$post->author])}}">{{$post->author}}</a></small>
 <div class="panel-body">
 {!!$post->content!!}
 <div class="panel-body">
 @foreach($images as $image)
         <div>
-        	{{Html::image('/images/'.$image->post_id.'/'.$image->filename, $alt="Photo", $attributes = array('width'=>'650', 'height'=>'380')) }}
+        	{{Html::image('/images/'.$image->post_id.'/'.$image->filename, $alt="Photo", $attributes = array('width'=>'650', 'height'=>'380', 'style'=>'display: inline;')) }}
         </div>
 @endforeach
 </div>
@@ -67,7 +67,7 @@
 	@endforeach
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/ajx.jquery.min.js"></script>
 <script type="text/javascript">
 
 function finsendComm(){

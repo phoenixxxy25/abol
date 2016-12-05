@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use DB;
 use Input;
 use View;
+use Session;
 use Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\Quotation;
@@ -45,14 +46,22 @@ class PostController extends Controller {
 	        'content' => 'required|max:1024',
     	]);
 
+
+		if(!Auth::guest() AND Auth::user()->login != null){
 		$id = DB::table('posts')->insertGetId(
 		    array(
 		    	'content' => Input::get('content'),
 		     	'author' => Auth::user()->login, 
 		     	'excerpt' => Input::get('excerpt'),
 		     	'title' => Input::get('title'),
+		     	'created_at' => date("Y-m-d H:i:s"),
 		     	)
-		);
+		);} else {
+			$request->session()->set('create_post_error', 'Ошибка!');
+	 		$request->session()->save();
+			return Redirect::back(); //->with('post', $post)->with('files', $files);
+	
+		}
 
 		$tags = Tag::All();
 		foreach ($tags as $key => $value) {
@@ -107,7 +116,7 @@ class PostController extends Controller {
 		     	'post_id' => $id
 		     	)
 		);
-      return response()->json(array('msg'=> $msg, 'comment'=> $comment, 'name'=> $name, 'cid' => $cid), 200);
+      return response()->json(array('comment'=> $comment, 'name'=> $name, 'cid' => $cid), 200);
     }
 
 
@@ -129,6 +138,7 @@ class PostController extends Controller {
 
 	public function update($id, Request $request)
 	{	
+
 		$this->validate($request, [
 	        'title' => 'required|max:255',
 	        'content' => 'required|max:1024',
@@ -138,7 +148,8 @@ class PostController extends Controller {
         $post->title     = Input::get('title');
         $post->excerpt   = Input::get('excerpt');
         $post->content   = Input::get('content');
-        $post->author    = Input::get('author');
+        $post->author    = Auth::user()->login;
+        $post->updated_at = date("Y-m-d H:i:s");
 
         $directory = 'post_images';
 		$directories = Storage::directories($directory);

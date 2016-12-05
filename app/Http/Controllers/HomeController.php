@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
-
+use DateTime;
 use App\Models\User;
 use App\Models\Post;
 use URL;
@@ -27,6 +27,7 @@ class HomeController extends Controller
 
     public function profile(Request $request)
     {
+      //dd(Auth::user());
         if(!Auth::guest() AND Auth::user()){
             $user = User::where('id', '=', Auth::user()->id)->get();
             return view('profile', ['user' => $user]);
@@ -49,7 +50,11 @@ class HomeController extends Controller
 
     public function updateprofile(Request $request)
     {
-      DB::table('users')->where('id', Auth::user()->id)->update(['login' => Input::get('login'), 'email' => Input::get('email'), 'full_name' => Input::get('full_name'), 'address' => Input::get('address'), 'city' => Input::get('city'), 'state' => Input::get('state'), 'country' => Input::get('country'), 'zip' => Input::get('pzip')]);
+
+      $bdate = Input::get('birthday').'';
+      //dd($bdate);
+      
+      DB::table('users')->where('id', Auth::user()->id)->update(['login' => Input::get('login'), 'email' => Input::get('email'), 'full_name' => Input::get('full_name'), 'birthday' => $bdate, 'address' => Input::get('address'), 'city' => Input::get('city'), 'state' => Input::get('state'), 'country' => Input::get('country'), 'zip' => Input::get('pzip')]);
       $msg = "Успешно!";
        return Redirect::to('profile');
     }

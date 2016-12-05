@@ -73,7 +73,7 @@ function searchPost(){
 	      $("#msg").html(data.msg);
 	      if(data.sresult != null){
 		    	$.each(data.sresult, function(index, value) {
-	    			getSrchResultItem(value.id, value.title, value.content);
+	    			getSrchResultItem(value.id, value.title, value.content, value.url);
 	    			console.log(value.content);
 				}); 
 	  		}
@@ -81,9 +81,9 @@ function searchPost(){
 	});
 }
 
-function getSrchResultItem(id, title, text)
+function getSrchResultItem(id, title, text, url)
 {
-			var tag =	'<article><a href="http://laravel:808/post/'+id+'"><h2>'+title+'</h2></a><p>'+text+'</p></article>';
+			var tag =	'<article><a href="'+url+'"><h2>'+title+'</h2></a><p>'+text+'</p></article>';
 			$('#resultpool').append(tag);
 }
 
